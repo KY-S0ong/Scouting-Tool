@@ -1,7 +1,7 @@
 import os, time
 import pandas as pd
 def clear():
-    os.system('clear')
+   os.system('cls' if os.name == 'nt' else 'clear')
 
 Scout = True
 
@@ -64,7 +64,7 @@ while Scout == True:
         if dT == '4':
             clear()
             DriveTrain = input("What Drive Train are they using: ")
-        os.system('clear')
+        clear()
         Q3 = input("Comfirm "+ DriveTrain+"\n\n1 = Yes\n2 = No\n\n> ")
         if Q3 == "1":
             DriveTrainList.append(DriveTrain)
@@ -76,14 +76,29 @@ while Scout == True:
             clear()
 #* ----------------- Vision System ------------------------
     while Question4 == False:
-        VisionSystem = input("What Vision System are they using\n\n1 - Lime Light\n2 - Photon Vision\n3 - No Guidance\n5 - None\n6 - Custom")
+        VisionSystem = input("What Vision System are they using\n\n1 - Lime Light\n2 - Photon Vision\n3 - No Guidance\n5 - None\n6 - Custom\n\n>")
+        
         if VisionSystem == "1":
             VisionType = 'Lime Light'
         if VisionSystem == "2":
             VisionType = 'Photon Vision'
         if VisionSystem == "3":
-            VisionType = 'Lime Light'
-     
+            VisionType = 'No Guidence'
+        if VisionSystem == "4":
+            VisionType = 'None'
+        if VisionSystem == "5":
+            VisionType = input("What Vision System are they using: ")
+        clear()
+        Q4 = input("Comfirm "+ VisionType+"\n\n1 = Yes\n2 = No\n\n> ")
+        if Q4 == "1":
+            VisionSystemList.append(VisionType)
+            Question3 = True 
+            clear()
+            break
+        else:
+            Question3 = False
+            clear() 
+
     print("Team Name: ", TeamNameList)
     print("Team Number: ", TeamNumberList)
     print("DriveTrain: ", DriveTrainList)
