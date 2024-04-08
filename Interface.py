@@ -17,6 +17,9 @@ DriveTrainList = []
 Question4 = False
 VisionSystemList = []
 
+Question5 = False
+AutonList = []
+
 
 clear()
 while Scout == True:
@@ -76,7 +79,7 @@ while Scout == True:
             clear()
 #* ----------------- Vision System ------------------------
     while Question4 == False:
-        VisionSystem = input("What Vision System are they using\n\n1 - Lime Light\n2 - Photon Vision\n3 - No Guidance\n5 - None\n6 - Custom\n\n>")
+        VisionSystem = input("What Vision System are they using\n\n1 - Lime Light\n2 - Photon Vision\n3 - No Guidance\n5 - None\n6 - Custom\n\n> ")
         
         if VisionSystem == "1":
             VisionType = 'Lime Light'
@@ -106,12 +109,13 @@ while Scout == True:
     
     time.sleep(3)
     clear()
-    
+    if os.path.exists('LocalScoutSheet.csv'):
+        os.remove('LocalScoutSheet.csv')
     Data = TeamNameList + TeamNumberList + DriveTrainList
     dict = {'Team Name': TeamNameList, 'Team Number': TeamNumberList, 'Drive Train': DriveTrainList, 'Vision Type': VisionSystemList}
     df = pd.DataFrame(dict)
     df.to_csv('LocalScoutSheet.csv')
-    KeepScouting = int(input("1 - Keep Scouting\n2 - End\n\n>"))
+    KeepScouting = int(input("1 - Keep Scouting\n2 - End\n\n> "))
     if KeepScouting == 1:
         Question1 = False
         Question2 = False
