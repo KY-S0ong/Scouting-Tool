@@ -2,9 +2,29 @@ import os, time
 import pandas as pd
 def clear():
    os.system('cls' if os.name == 'nt' else 'clear')
-
 Scout = True
+Run = True
 
+#?------------ Instructions -------------------
+# Hi! If you are reading this, you are either part of FRC 3958 Schordingers Cat,
+# or another team who had downloaded this off our Git Hub. 
+# Please do not remove the instructions as I worked hard on this 
+
+# Quick rundown
+# There are 3 files that should concern you
+    # Interface.py
+    # LocalScoutSheet.csv - Send this to your online spreadsheet of choice
+    # ScoutSheet_BackUp.csv - Sends the overided spreadsheet to here
+# Runs in any python IDE. You may have to install Pandas in your IDE of choice. 
+
+# Questions can be added/modified with a simply understanding of python, but heres a sumerized version
+    # [] is to indcate a list. This is to make a new subject to put into the spreadsheet
+    # Put the List name into Data & dict or "Add New Subjects" 
+    # Follow the format of the rest and you should be fine
+
+# Enjoy!
+
+#*------------ Questions Lists Add Here -------------------
 Question1 = False
 TeamNameList = []
 
@@ -19,6 +39,63 @@ VisionSystemList = []
 
 Question5 = False
 AutonList = []
+
+Question6 = False
+AutonPositionsList = []
+
+#!------------ Scout Tool Run -------------------
+while Run == True:
+    clear()
+    RunType = int(input("Scout Tool\n\n1 - Delete Scout Sheet\n2 - Delete Back Up Scout \n3 - Delete all\n4 - Scout\n\n> "))
+    clear()
+    if RunType == 1:
+        if os.path.exists('LocalScoutSheet.csv'):
+            os.remove('LocalScoutSheet.csv')
+            print("LocalScoutSheet.csv deleted succesfully!")
+            time.sleep(1)
+            clear()
+        else:
+            print("Error | Nothing to delete")
+            time.sleep(1)
+            clear()
+    if RunType == 2:
+        if os.path.exists('ScoutSheet_BackUp.csv'):
+            os.remove('ScoutSheet_BackUp.csv')
+            print("ScoutSheet_BackUp.csv deleted succesfully!")
+            time.sleep(1)
+            clear()
+        else:
+            print("Error | Nothing to delete")
+            time.sleep(1)
+            clear()
+    if RunType == 3:
+        if os.path.exists('ScoutSheet_BackUp.csv'):
+            os.remove('ScoutSheet_BackUp.csv')
+            print("ScoutSheet_BackUp.csv deleted succesfully!")
+            time.sleep(1)
+            clear()
+        else:
+            print("Error | Nothing to delete")
+            time.sleep(1)
+            clear()
+        if os.path.exists('LocalScoutSheet.csv'):
+            os.remove('LocalScoutSheet.csv')
+            print("LocalScoutSheet.csv deleted succesfully!")
+            time.sleep(1)
+            clear()
+        else:
+            print("Error | Nothing to delete")
+            time.sleep(1)
+            clear()
+    if RunType == 4:
+        print("Intiating Scout Mode")
+        time.sleep(1)
+        clear()
+        Run = False
+        break
+
+
+
 
 if os.path.exists('ScoutSheet_BackUp.csv'):
     os.remove('ScoutSheet_BackUp.csv')
@@ -65,13 +142,16 @@ while Scout == True:
         
         if dT == '1':
             DriveTrain = "Swerve Drive"
-        if dT == '2':
+        elif dT == '2':
             DriveTrain = "Mechanum Drive"
-        if dT == '3':
+        elif dT == '3':
             DriveTrain = "Tank Drive"
-        if dT == '4':
+        elif dT == '4':
             clear()
             DriveTrain = input("What Drive Train are they using: ")
+
+        else:
+            DriveTrain = "Did Not Enter"
         clear()
         Q3 = input("Comfirm "+ DriveTrain+"\n\n1 = Yes\n2 = No\n\n> ")
         if Q3 == "1":
@@ -88,15 +168,18 @@ while Scout == True:
         
         if VisionSystem == "1":
             VisionType = 'Lime Light'
-        if VisionSystem == "2":
+        elif VisionSystem == "2":
             VisionType = 'Photon Vision'
-        if VisionSystem == "3":
+        elif VisionSystem == "3":
             VisionType = 'No Guidence'
-        if VisionSystem == "4":
+        elif VisionSystem == "4":
             VisionType = 'None'
-        if VisionSystem == "5":
+        elif VisionSystem == "5":
             clear()
             VisionType = input("What Vision System are they using: ")
+
+        else:
+            VisionType == "Did Not Enter"
     
         clear()
         Q4 = input("Comfirm "+ VisionType+"\n\n1 = Yes\n2 = No\n\n> ")
@@ -106,26 +189,57 @@ while Scout == True:
             clear()
             break
         else:
-            Question3 = False
+            Question4 = False
+            clear() 
+#* ----------------- Auton Capabilities ------------------------
+    while Question5 == False:
+        AutonType = input("What can your Auton Do\n\n1 - Nothing\n2 - Can Taxi\n3 - Score (Custom Ammount)\n4 - Other\n\n> ")
+        if AutonType == "1":
+            Auton = "Nothing"
+        elif AutonType == "2":
+            Auton = "Taxi"
+        elif AutonType == "3":
+            Auton = input("How many Game Pieces can they Score: ")
+        elif AutonType == "4":
+            Auton = input("What can they do: ")
+
+        else:
+            Auton = "Did not Enter"
+        Q5 = input("Comfirm "+ Auton+"\n\n1 = Yes\n2 = No\n\n> ")
+        if Q5 == "1":
+            AutonList.append(Auton)
+            Question5 = True 
+            clear()
+            break
+        else:
+            Question5 = False
             clear() 
 
     print("Team Name: ", TeamNameList)
     print("Team Number: ", TeamNumberList)
     print("DriveTrain: ", DriveTrainList)
     print("Vision Type: ", VisionSystemList)
-    
-    time.sleep(3)
+    print("Auton Type", AutonList)
+    print("Auton Posistions", AutonPositionsList)
+
+
+    time.sleep(1.5)
     clear()
-    Data = TeamNameList + TeamNumberList + DriveTrainList + VisionSystemList
-    dict = {'Team Name': TeamNameList, 'Team Number': TeamNumberList, 'Drive Train': DriveTrainList, 'Vision Type': VisionSystemList}
+   #* ----------------- Add New Subjects ------------------------
+    Data = TeamNameList + TeamNumberList + DriveTrainList + VisionSystemList + AutonList
+    dict = {'Team Name': TeamNameList, 'Team Number': TeamNumberList, 'Drive Train': DriveTrainList, 'Vision Type': VisionSystemList, "Auton Type": AutonList}
+   
     df = pd.DataFrame(dict)
     df.to_csv('LocalScoutSheet.csv')
+    #* ----------------- Keep Scouting ------------------------
     KeepScouting = int(input("1 - Keep Scouting\n2 - End\n\n> "))
     if KeepScouting == 1:
         Question1 = False
         Question2 = False
         Question3 = False
         Question4 = False
+        Question5 = False
+        Question6 = False
         clear()
    
     else:
@@ -133,11 +247,3 @@ while Scout == True:
         break
 clear()
 print("Scout Session has ended\n\nAny Scouting data in previous Scout Session has been moved to 'ScoutSheet_BackUp.csv'")
-    
-  
-        
-    
-    
-    
-
-
