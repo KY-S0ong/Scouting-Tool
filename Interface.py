@@ -20,6 +20,11 @@ VisionSystemList = []
 Question5 = False
 AutonList = []
 
+if os.path.exists('ScoutSheet_BackUp.csv'):
+    os.remove('ScoutSheet_BackUp.csv')
+if os.path.exists('LocalScoutSheet.csv'):
+        os.rename('LocalScoutSheet.csv','ScoutSheet_BackUp.csv')
+        #os.remove('LocalScoutSheet.csv')
 
 clear()
 while Scout == True:
@@ -79,7 +84,7 @@ while Scout == True:
             clear()
 #* ----------------- Vision System ------------------------
     while Question4 == False:
-        VisionSystem = input("What Vision System are they using\n\n1 - Lime Light\n2 - Photon Vision\n3 - No Guidance\n5 - None\n6 - Custom\n\n> ")
+        VisionSystem = input("What Vision System are they using\n\n1 - Lime Light\n2 - Photon Vision\n3 - No Guidance\n4 - None\n5 - Custom\n\n> ")
         
         if VisionSystem == "1":
             VisionType = 'Lime Light'
@@ -90,7 +95,9 @@ while Scout == True:
         if VisionSystem == "4":
             VisionType = 'None'
         if VisionSystem == "5":
+            clear()
             VisionType = input("What Vision System are they using: ")
+    
         clear()
         Q4 = input("Comfirm "+ VisionType+"\n\n1 = Yes\n2 = No\n\n> ")
         if Q4 == "1":
@@ -109,9 +116,7 @@ while Scout == True:
     
     time.sleep(3)
     clear()
-    if os.path.exists('LocalScoutSheet.csv'):
-        os.remove('LocalScoutSheet.csv')
-    Data = TeamNameList + TeamNumberList + DriveTrainList
+    Data = TeamNameList + TeamNumberList + DriveTrainList + VisionSystemList
     dict = {'Team Name': TeamNameList, 'Team Number': TeamNumberList, 'Drive Train': DriveTrainList, 'Vision Type': VisionSystemList}
     df = pd.DataFrame(dict)
     df.to_csv('LocalScoutSheet.csv')
@@ -126,7 +131,8 @@ while Scout == True:
     else:
         Scout = False
         break
-    
+clear()
+print("Scout Session has ended\n\nAny Scouting data in previous Scout Session has been moved to 'ScoutSheet_BackUp.csv'")
     
   
         
