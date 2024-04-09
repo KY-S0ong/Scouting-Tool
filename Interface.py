@@ -41,7 +41,7 @@ Question5 = False
 AutonList = []
 
 Question6 = False
-AutonPositionsList = []
+AutonPosistionList = []
 
 #!------------ Scout Tool Run -------------------
 while Run == True:
@@ -194,6 +194,7 @@ while Scout == True:
 #* ----------------- Auton Capabilities ------------------------
     while Question5 == False:
         AutonType = input("What can your Auton Do\n\n1 - Nothing\n2 - Can Taxi\n3 - Score (Custom Ammount)\n4 - Other\n\n> ")
+        clear()
         if AutonType == "1":
             Auton = "Nothing"
         elif AutonType == "2":
@@ -214,23 +215,41 @@ while Scout == True:
         else:
             Question5 = False
             clear() 
-
+#* ----------------- Auton Positions ------------------------    
+    while Question6 == False:
+        Position = input("Which sides can their robot preform their auton. Select all the apply\n\n1 - Left\n2 - Center\n3 - Right\n4 - Custom\n5 - End\n\n> ")
+        clear()
+        
+        Q6 = input("Comfirm "+ Position+"\n\n1 = Yes\n2 = No\n\n> ")
+        if Q6 == "1":
+            AutonPosistionList.append(Position)
+            clear()
+        else:
+            Question6 = False
+            clear() 
+        
+    
+    
+    time.sleep(1.5)
+    clear()
+   #* ----------------- Add New Subjects ------------------------
+    Data = TeamNameList + TeamNumberList + DriveTrainList + VisionSystemList + AutonList
+    dict = {'Team Name': TeamNameList, 'Team Number': TeamNumberList, 'Drive Train': DriveTrainList, 'Vision Type': VisionSystemList, "Auton Type": AutonList, "Auton Posistion": AutonPosistionList}
+   
+    df = pd.DataFrame(dict)
+    df.to_csv('LocalScoutSheet.csv')
+    if os.path.exists('LocalScoutSheet.csv'):
+        print("Team saved succesfully")
+        time.sleep(0.8)
+        clear()
+    
     print("Team Name: ", TeamNameList)
     print("Team Number: ", TeamNumberList)
     print("DriveTrain: ", DriveTrainList)
     print("Vision Type: ", VisionSystemList)
     print("Auton Type", AutonList)
-    print("Auton Posistions", AutonPositionsList)
-
-
-    time.sleep(1.5)
-    clear()
-   #* ----------------- Add New Subjects ------------------------
-    Data = TeamNameList + TeamNumberList + DriveTrainList + VisionSystemList + AutonList
-    dict = {'Team Name': TeamNameList, 'Team Number': TeamNumberList, 'Drive Train': DriveTrainList, 'Vision Type': VisionSystemList, "Auton Type": AutonList}
-   
-    df = pd.DataFrame(dict)
-    df.to_csv('LocalScoutSheet.csv')
+    print("Auton Posistions", AutonPosistionList)
+    print("")
     #* ----------------- Keep Scouting ------------------------
     KeepScouting = int(input("1 - Keep Scouting\n2 - End\n\n> "))
     if KeepScouting == 1:
@@ -239,6 +258,7 @@ while Scout == True:
         Question3 = False
         Question4 = False
         Question5 = False
+        Question6 = False
         Question6 = False
         clear()
    
