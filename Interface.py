@@ -5,6 +5,11 @@ def clear():
 Scout = True
 Run = True
 
+def pspace(str):
+    print(str)
+    print()
+
+
 #?------------ Instructions -------------------
 # Hi! If you are reading this, you are either part of FRC 3958 Schordingers Cat,
 # or another team who had downloaded this off our Git Hub. 
@@ -46,7 +51,7 @@ AutonPosistionList = []
 #!------------ Scout Tool Run -------------------
 while Run == True:
     clear()
-    RunType = int(input("Scout Tool\n\n1 - Delete Scout Sheet\n2 - Delete Back Up Scout \n3 - Delete all\n4 - Scout\n\n> "))
+    RunType = int(input("Scout Tool\n\n1 - Delete Scout Sheet\n2 - Delete Back Up Scout \n3 - Delete all\n4 - Scout\n5 - Continue Scout\n\n> "))
     clear()
     if RunType == 1:
         if os.path.exists('LocalScoutSheet.csv'):
@@ -93,6 +98,42 @@ while Run == True:
         clear()
         Run = False
         break
+    # Under Testing if RunType == 5:
+        if os.path.exists('LocalScoutSheet.csv'):
+            print("Continuing Scout Seassion")
+            dict = pd. read_csv('LocalScoutSheet.csv')
+       
+            Name = dict[['Team Name']]
+            Num = dict[['Team Number']]
+            Drive = dict[['Drive Train']]
+            Vision = dict[['Vision Type']]
+            Auto = dict[['Auton Type']]
+            
+            
+            TeamNameList.append(Name)
+            TeamNumberList.append(Num)
+            DriveTrainList.append(Drive)
+            VisionSystemList.append(Vision)
+            AutonList.append(Auto)
+            time.sleep(1)
+            clear()
+            
+            pspace(TeamNameList)
+            pspace(TeamNumberList)
+            pspace(DriveTrainList)
+            pspace(VisionSystemList)
+            pspace(AutonList)
+            
+            time.sleep(3)
+            clear()
+            Run = False
+            break
+        else:
+            print("Error | Nothing to continue")
+            time.sleep(1)
+            clear()
+        
+        
 
 
 
@@ -216,17 +257,17 @@ while Scout == True:
             Question5 = False
             clear() 
 #* ----------------- Auton Positions ------------------------    
-    while Question6 == False:
-        Position = input("Which sides can their robot preform their auton. Select all the apply\n\n1 - Left\n2 - Center\n3 - Right\n4 - Custom\n5 - End\n\n> ")
-        clear()
+    #while Question6 == False:
+     #   Position = input("Which sides can their robot preform their auton. Select all the apply\n\n1 - Left\n2 - Center\n3 - Right\n4 - Custom\n5 - End\n\n> ")
+     #   clear()
         
-        Q6 = input("Comfirm "+ Position+"\n\n1 = Yes\n2 = No\n\n> ")
-        if Q6 == "1":
-            AutonPosistionList.append(Position)
-            clear()
-        else:
-            Question6 = False
-            clear() 
+      #  Q6 = input("Comfirm "+ Position+"\n\n1 = Yes\n2 = No\n\n> ")
+       # if Q6 == "1":
+      #      AutonPosistionList.append(Position)
+       #     clear()
+       # else:
+       #     Question6 = False
+       #     clear() 
         
     
     
@@ -234,7 +275,7 @@ while Scout == True:
     clear()
    #* ----------------- Add New Subjects ------------------------
     Data = TeamNameList + TeamNumberList + DriveTrainList + VisionSystemList + AutonList
-    dict = {'Team Name': TeamNameList, 'Team Number': TeamNumberList, 'Drive Train': DriveTrainList, 'Vision Type': VisionSystemList, "Auton Type": AutonList, "Auton Posistion": AutonPosistionList}
+    dict = {'Team Name': TeamNameList, 'Team Number': TeamNumberList, 'Drive Train': DriveTrainList, 'Vision Type': VisionSystemList, "Auton Type": AutonList}
    
     df = pd.DataFrame(dict)
     df.to_csv('LocalScoutSheet.csv')
@@ -248,7 +289,7 @@ while Scout == True:
     print("DriveTrain: ", DriveTrainList)
     print("Vision Type: ", VisionSystemList)
     print("Auton Type", AutonList)
-    print("Auton Posistions", AutonPosistionList)
+
     print("")
     #* ----------------- Keep Scouting ------------------------
     KeepScouting = int(input("1 - Keep Scouting\n2 - End\n\n> "))
