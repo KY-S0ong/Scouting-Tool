@@ -36,6 +36,9 @@ TeamNameList = []
 Question2 = False
 TeamNumberList = []
 
+Question2andHalf = False
+RobotNameList = []
+
 Question3 = False
 DriveTrainList = []
 
@@ -47,6 +50,18 @@ AutonList = []
 
 Question6 = False
 AutonPosistionList = []
+
+Question7 = False
+CoralLevelsList = []
+
+Question8 = False
+ProcessorList = []
+
+Question9 = False
+ClimbTimingList = []
+
+Question10 = False
+CycleTimeList = []
 
 #!------------ Scout Tool Run -------------------
 while Run == True:
@@ -147,6 +162,20 @@ if os.path.exists('LocalScoutSheet.csv'):
 clear()
 while Scout == True:
 
+#* ----------------- Team Number ----------------------
+    while Question2 == False:
+        teamNumber = input("What is their Team Number: ")
+        clear()
+        Q2 = input("Comfirm "+teamNumber+"\n\n1 = Yes\n2 = No\n\n> ")
+        if Q2 == "1":
+            TeamNumberList.append(teamNumber)
+            Question2 = True 
+            clear()
+            break
+        else:
+            Question2 = False
+            clear()
+            
 #* ----------------- Team Name -------------------------
     while Question1 == False:
         teamName = input("What is their Team Name: ")
@@ -162,27 +191,28 @@ while Scout == True:
             Question1 = False
             clear()
             
-#* ----------------- Team Number ----------------------
-    while Question2 == False:
-        teamNumber = input("What is their Team Number: ")
+#* ----------------- Robot Name ----------------------
+    while Question2andHalf == False:
+        robotname = input("What is their Robot Name: ")
         
-        
-        Q2 = input("Comfirm "+teamNumber+"\n\n1 = Yes\n2 = No\n\n> ")
-        if Q2 == "1":
-            TeamNumberList.append(teamNumber)
-            Question2 = True 
+        clear()
+        Q = input("Comfirm "+robotname+"\n\n1 = Yes\n2 = No\n\n> ")
+        if Q == "1":
+            RobotNameList.append(robotname)
+            Question2andHalf = True 
             clear()
             break
         else:
-            Question2 = False
+            Question2andHalf = False
             clear()
-
 #* ----------------- Drive Train ----------------------
     while Question3 == False:
         dT = input("What is their Drive Train\n\n1 - Swerve Drive\n2 - Mechanum Drive\n3 - Tank Drive\n4 - None of the above\n\n> ")
         
         if dT == '1':
-            DriveTrain = "Swerve Drive"
+            clear()
+            q = input("What type of motors, swerve module, and gear ratios?\n\nExample format: Krakens, SDS MK4, 6.75:1\n\n> ")
+            DriveTrain = "Swerve Drive, " + q
         elif dT == '2':
             DriveTrain = "Mechanum Drive"
         elif dT == '3':
@@ -234,14 +264,15 @@ while Scout == True:
             clear() 
 #* ----------------- Auton Capabilities ------------------------
     while Question5 == False:
-        AutonType = input("What can your Auton Do\n\n1 - Nothing\n2 - Can Taxi\n3 - Score (Custom Ammount)\n4 - Other\n\n> ")
+        AutonType = input("What can your Auton Do\n\n1 - Nothing\n2 - Can Taxi\n3 - Score Coral (Custom Ammount)\n4 - Other\n\n> ")
         clear()
         if AutonType == "1":
             Auton = "Nothing"
         elif AutonType == "2":
             Auton = "Taxi"
         elif AutonType == "3":
-            Auton = input("How many Game Pieces can they Score: ")
+            x = input("How much Coral can they Score: ")
+            Auton = "Score Coral: " + x
         elif AutonType == "4":
             Auton = input("What can they do: ")
 
@@ -257,25 +288,74 @@ while Scout == True:
             Question5 = False
             clear() 
 #* ----------------- Auton Positions ------------------------    
-    #while Question6 == False:
-     #   Position = input("Which sides can their robot preform their auton. Select all the apply\n\n1 - Left\n2 - Center\n3 - Right\n4 - Custom\n5 - End\n\n> ")
-     #   clear()
+    while Question6 == False:
+        Position = input("Which sides can their robot preform their auton. \n\nLeft, Center, Right\n\n> ")
+        clear()
         
-      #  Q6 = input("Comfirm "+ Position+"\n\n1 = Yes\n2 = No\n\n> ")
-       # if Q6 == "1":
-      #      AutonPosistionList.append(Position)
-       #     clear()
-       # else:
-       #     Question6 = False
-       #     clear() 
+        Q6 = input("Comfirm "+ Position+"\n\n1 = Yes\n2 = No\n\n> ")
+        if Q6 == "1":
+            AutonPosistionList.append(Position)
+            clear()
+            Question6 = True
+        else:
+            Question6 = False
+            clear() 
         
-    
-    
+    while Question7 == False:
+        q = input("What Coral Levels you prefer to score\n\n> ")
+        clear()
+        Q7 = input("Comfirm "+ q+"\n\n1 = Yes\n2 = No\n\n> ")
+        if Q7 == "1":
+            CoralLevelsList.append(q)
+            clear()
+            Question7 = True
+        else:
+            Question7 = False
+            clear()
+    while Question8 == False:
+        x = input("Where/can you score Algae\n\n1 - Proccesor\n2 - Barge\n3 - None\n\n> ")
+        if x == "1":
+            c = "Processor"
+        elif x == "2":
+            c = "Barge"
+        elif x == "3":
+            c = "None"
+        clear()
+        Q8 = input("Comfirm "+ c+"\n\n1 = Yes\n2 = No\n\n> ")
+        
+        if Q8 == "1":
+            ProcessorList.append(c)
+            clear()
+            Question8 = True
+        else:
+            Question8 = False
+            clear()
+    while Question9 == False:
+        x = input("When do you start climbing: ")
+        clear()
+        Q9 = input("Comfirm "+ x+"\n\n1 = Yes\n2 = No\n\n> ")
+        
+        if Q9 == "1":
+            ClimbTimingList.append(x)
+            clear()
+            Question9 = True
+        else:
+            Question9 = False
+            clear()
+        
     time.sleep(1.5)
     clear()
    #* ----------------- Add New Subjects ------------------------
-    Data = TeamNameList + TeamNumberList + DriveTrainList + VisionSystemList + AutonList
-    dict = {'Team Name': TeamNameList, 'Team Number': TeamNumberList, 'Drive Train': DriveTrainList, 'Vision Type': VisionSystemList, "Auton Type": AutonList}
+    Data = TeamNameList + TeamNumberList + RobotNameList + DriveTrainList + VisionSystemList + AutonList + CoralLevelsList + ProcessorList + ClimbTimingList
+    dict = {'Team Name': TeamNameList, 
+            'Team Number': TeamNumberList, 
+            'Robot Name': RobotNameList,
+            'Drive Train': DriveTrainList,
+            'Vision Type': VisionSystemList,
+            'Auton Type': AutonList,
+            'Coral Levels': CoralLevelsList,
+            'Processsor/Algae': ProcessorList,
+            "Climb Timing": ClimbTimingList}
    
     df = pd.DataFrame(dict)
     df.to_csv('LocalScoutSheet.csv')
@@ -286,9 +366,13 @@ while Scout == True:
     
     print("Team Name: ", TeamNameList)
     print("Team Number: ", TeamNumberList)
+    print("Robot Name: ", RobotNameList)
     print("DriveTrain: ", DriveTrainList)
     print("Vision Type: ", VisionSystemList)
-    print("Auton Type", AutonList)
+    print("Auton Type: ", AutonList)
+    print("Coral Levels: ", CoralLevelsList)
+    print("Processor/Algae: ", ProcessorList)
+    print("StartClimbing: ", ClimbTimingList)
 
     print("")
     #* ----------------- Keep Scouting ------------------------
@@ -296,11 +380,16 @@ while Scout == True:
     if KeepScouting == 1:
         Question1 = False
         Question2 = False
+        Question2andHalf = False
         Question3 = False
         Question4 = False
         Question5 = False
         Question6 = False
         Question6 = False
+        Question7 = False
+        Question8 = False
+        Question9 = False
+        
         clear()
    
     else:
